@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tec/gen/assets.gen.dart';
 import 'package:tec/my_colors.dart';
- import 'package:tec/view/home_screen.dart';
+import 'package:tec/view/home_screen.dart';
 import 'package:tec/view/profile_screen.dart';
 
- 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -12,19 +11,16 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0; 
-
+  var selectedPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+    double bodyMargin = size.width / 20;
 
     return SafeArea(
       child: Scaffold(
@@ -32,54 +28,56 @@ class _MainScreenState extends State<MainScreen> {
         drawer: Drawer(
           backgroundColor: SolidColors.scafoldBg,
           child: Padding(
-            padding:  EdgeInsets.only(right: bodyMargin,left: bodyMargin),
+            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
-                  child: Center(
-                    child: Image.asset(Assets.images.logo.path,scale: 3,),
-                  )
+                    child: Center(
+                  child: Image.asset(
+                    Assets.images.logo.path,
+                    scale: 3,
                   ),
-                  ListTile(
-
-                    title: Text("پروفایل کاربری",style: textTheme.headline4,),
-                    onTap: () {
-                      
-                    },
+                )),
+                ListTile(
+                  title: Text(
+                    "پروفایل کاربری",
+                    style: textTheme.headline4,
                   ),
-                  const Divider(
-                    color: SolidColors.dividerColor,
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(
+                    "درباره تک‌بلاگ",
+                    style: textTheme.headline4,
                   ),
-                  ListTile(
-
-                    title: Text("درباره تک‌بلاگ",style: textTheme.headline4,),
-                    onTap: () {
-                      
-                    },
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(
+                    "اشتراک گذاری تک بلاگ",
+                    style: textTheme.headline4,
                   ),
-                  const Divider(
-                    color: SolidColors.dividerColor,
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(
+                    "تک‌بلاگ در گیت هاب",
+                    style: textTheme.headline4,
                   ),
-                  ListTile(
-
-                    title: Text("اشتراک گذاری تک بلاگ",style: textTheme.headline4,),
-                    onTap: () {
-                      
-                    },
-                  ),
-                  const Divider(
-                    color: SolidColors.dividerColor,
-                  ),
-                  ListTile(
-
-                    title: Text("تک‌بلاگ در گیت هاب",style: textTheme.headline4,),
-                    onTap: () {
-                      
-                    },
-                  ),
-                  const Divider(
-                    color: SolidColors.dividerColor,
-                  ),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
               ],
             ),
           ),
@@ -89,61 +87,73 @@ class _MainScreenState extends State<MainScreen> {
           elevation: 0,
           backgroundColor: SolidColors.scafoldBg,
           title: //appbar
-              Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: (() {
-
+              Padding(
+            padding: EdgeInsets.fromLTRB(bodyMargin, 0, bodyMargin, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: (() {
                     _key.currentState!.openDrawer();
-
-                }),
-                child: const Icon(
-                  Icons.menu,
-                  color: Colors.black,
+                  }),
+                  child: const Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              Image(
-                image: Assets.images.logo,
-                height: size.height / 13.6,
-              ),
-              const Icon(Icons.search, color: Colors.black),
-            ],
+                Image(
+                  image: Assets.images.logo,
+                  height: size.height / 13.6,
+                ),
+                const Icon(Icons.search, color: Colors.black),
+              ],
+            ),
           ),
         ),
         body: Stack(
-
           children: [
-           Positioned.fill(
-             child: IndexedStack(
-               index: selectedPageIndex,
-               children: [
-                    HomeScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin), //0
-                    ProfileScreen(size: size, textTheme: textTheme, bodyMargin: bodyMargin) //1
-               ],
-
-             )
-            
+            Positioned.fill(
+                child: IndexedStack(
+              index: selectedPageIndex,
+              children: [
+                HomeScreen(
+                    size: size,
+                    textTheme: textTheme,
+                    bodyMargin: bodyMargin), //0
+                ProfileScreen(
+                    size: size,
+                    textTheme: textTheme,
+                    bodyMargin: bodyMargin) //1
+              ],
+            )),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                height: size.height / 15,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: GradiantColors.bottomNavBackgroand,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter)),
+              ),
             ),
-           BottomNavigation(
-             size: size,
-             bodyMargin: bodyMargin,
-             changeScreen: (int value){
-
-                  setState(() {
-                    selectedPageIndex = value;
-                  });
-
-             },
-             ),
+            BottomNavigation(
+              size: size,
+              bodyMargin: bodyMargin,
+              changeScreen: (int value) {
+                setState(() {
+                  selectedPageIndex = value;
+                });
+              },
+            ),
           ],
-
         ),
-       ),
+      ),
     );
   }
 }
-
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
@@ -160,52 +170,44 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom:8,
+      bottom: 10,
       right: 0,
       left: 0,
-      child: Container(
-              height: size.height / 10,
-              decoration: const BoxDecoration(
-         gradient: LinearGradient(
-             colors: GradiantColors.bottomNavBackgroand,
-             begin: Alignment.topCenter,
-             end: Alignment.bottomCenter)),
-              child: Padding(
-       padding:  EdgeInsets.only(right: bodyMargin,left: bodyMargin),
-       child: Container(
-         height: size.height / 8,
-         decoration: const BoxDecoration(
-           borderRadius: BorderRadius.all(Radius.circular(18)),
-           gradient: LinearGradient(
-             colors: GradiantColors.bottomNav,
-           ),
-         ),
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceAround,
-           children: [
-             IconButton(
-                 onPressed: (()=>changeScreen(0)),
-                 icon: ImageIcon(
-                   Assets.icons.home,
-                   color: Colors.white,
-                 )),
-             IconButton(
-                 onPressed: (() {}),
-                 icon: ImageIcon(
-                   Assets.icons.write,
-                   color: Colors.white,
-                 )),
-             IconButton(
-                 onPressed: (()=>changeScreen(1)),
-                 icon: ImageIcon(
-                   Assets.icons.user,
-                   color: Colors.white,
-                 )),
-           ],
-         ),
-       ),
-              ),
+      child: Padding(
+        padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+        child: Container(
+          height: size.height / 13,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+            gradient: LinearGradient(
+              colors: GradiantColors.bottomNav,
             ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: (() => changeScreen(0)),
+                  icon: ImageIcon(
+                    Assets.icons.home,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                  onPressed: (() {}),
+                  icon: ImageIcon(
+                    Assets.icons.write,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                  onPressed: (() => changeScreen(1)),
+                  icon: ImageIcon(
+                    Assets.icons.user,
+                    color: Colors.white,
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

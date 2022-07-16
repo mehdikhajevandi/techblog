@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tec/models/fake_data.dart';
 import 'package:tec/my_colors.dart';
@@ -22,42 +21,38 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-     physics: const BouncingScrollPhysics(),
-     child: Padding(
-       padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-       child: Column(
-         children: [
-           HomePagePoster(size: size, textTheme: textTheme),
-        
-           const SizedBox(
-             height: 16,
-           ),
-           
-           HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
-          
-           const SizedBox(
-             height: 32,
-           ),
-        
-           SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
-        
-           HomePageBlogList(size: size, bodyMargin: bodyMargin, textTheme: textTheme),
-        
-           const SizedBox(
-             height: 32,
-           ),
-            
-           SeeMorePodcast(bodyMargin: bodyMargin, textTheme: textTheme),
-        
-           
-           HomePagePodcastList(size: size, bodyMargin: bodyMargin),
-        
-           const SizedBox(height: 60,)
-        
-         ],
-       ),
-     ),
-          );
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+        child: Column(
+          children: [
+            HomePagePoster(
+              size: size,
+              textTheme: textTheme,
+              bodyMargin: bodyMargin,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
+            const SizedBox(
+              height: 32,
+            ),
+            SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePageBlogList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            const SizedBox(
+              height: 32,
+            ),
+            SeeMorePodcast(bodyMargin: bodyMargin, textTheme: textTheme),
+            HomePagePodcastList(size: size, bodyMargin: bodyMargin),
+            const SizedBox(
+              height: 60,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -78,11 +73,15 @@ class HomePagePodcastList extends StatelessWidget {
       child: ListView.builder(
           itemCount: podcastList.getRange(0, 5).length,
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
           itemBuilder: ((context, index) {
             //podcast item
             return Padding(
               padding: EdgeInsets.only(
-                  right: index == 0 ? bodyMargin : 15),
+                  right: index == 0 ? bodyMargin : 15,
+                  left: index == podcastList.getRange(0, 5).length - 1
+                      ? bodyMargin
+                      : 0),
               child: Column(
                 children: [
                   Padding(
@@ -94,11 +93,11 @@ class HomePagePodcastList extends StatelessWidget {
                         children: [
                           Container(
                               decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(16)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    podcastList[index].imageUrl),
+                                image:
+                                    NetworkImage(podcastList[index].imageUrl),
                                 fit: BoxFit.cover),
                           ))
                         ],
@@ -172,11 +171,15 @@ class HomePageBlogList extends StatelessWidget {
       child: ListView.builder(
           itemCount: blogList.getRange(0, 5).length,
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
           itemBuilder: ((context, index) {
             //blog item
             return Padding(
               padding: EdgeInsets.only(
-                  right: index == 0 ? bodyMargin : 15),
+                  right: index == 0 ? bodyMargin : 15,
+                  left: index == blogList.getRange(0, 5).length - 1
+                      ? bodyMargin
+                      : 0),
               child: Column(
                 children: [
                   Padding(
@@ -188,31 +191,26 @@ class HomePageBlogList extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(16)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(16)),
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      blogList[index].imageUrl),
+                                  image: NetworkImage(blogList[index].imageUrl),
                                   fit: BoxFit.cover),
                             ),
-                            foregroundDecoration:
-                                const BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(16)),
-                                    gradient: LinearGradient(
-                                        begin:
-                                            Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                        colors: GradiantColors
-                                            .blogPost)),
+                            foregroundDecoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                gradient: LinearGradient(
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                    colors: GradiantColors.blogPost)),
                           ),
                           Positioned(
                             bottom: 8,
                             left: 0,
                             right: 0,
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
                                   blogList[index].writer,
@@ -302,28 +300,37 @@ class HomePageTagList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     height: 60,
-     child: ListView.builder(
-         scrollDirection: Axis.horizontal,
-         itemCount: tagList.length,
-         itemBuilder: ((context, index) {
-           return Padding(
-             padding: EdgeInsets.fromLTRB(
-                 0, 8, index == 0 ? bodyMargin : 15, 8),
-             child: MainTags(textTheme: textTheme, index: index,),
-           );
-         })),
-           );
+      height: 60,
+      child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: tagList.length,
+          itemBuilder: ((context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                  index == tagList.length - 1 ? bodyMargin : 0,
+                  8,
+                  index == 0 ? bodyMargin : 15,
+                  8),
+              child: MainTags(
+                textTheme: textTheme,
+                index: index,
+              ),
+            );
+          })),
+    );
   }
 }
 
 class HomePagePoster extends StatelessWidget {
   const HomePagePoster({
     Key? key,
+    required this.bodyMargin,
     required this.size,
     required this.textTheme,
   }) : super(key: key);
 
+  final double bodyMargin;
   final Size size;
   final TextTheme textTheme;
 
@@ -331,23 +338,24 @@ class HomePagePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: size.width / 1.25,
-          height: size.height / 4.2,
-          decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(16)),
-              image: DecorationImage(
-                  image:
-                      AssetImage(homePagePosterMap["imageAsset"]),
-                  fit: BoxFit.cover)),
-          foregroundDecoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              gradient: LinearGradient(
-                colors: GradiantColors.homePosterCoverGradiant,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              )),
+        Padding(
+          padding: EdgeInsets.fromLTRB(bodyMargin, 0, bodyMargin, 0),
+          child: Container(
+            width: size.width / 1,
+            height: size.height / 4.2,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                image: DecorationImage(
+                    image: AssetImage(homePagePosterMap["imageAsset"]),
+                    fit: BoxFit.cover)),
+            foregroundDecoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                gradient: LinearGradient(
+                  colors: GradiantColors.homePosterCoverGradiant,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                )),
+          ),
         ),
         Positioned(
           bottom: 8,
