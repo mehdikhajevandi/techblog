@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tec/my_colors.dart';
+import 'package:tec/component/my_colors.dart';
 import 'package:tec/view/main_screen.dart';
 import 'package:tec/view/my_cats.dart';
 import 'package:tec/view/register_intro.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale('fa', ''), // farsi
+          Locale('fa', ''), // farsiflutte
         ],
         theme: ThemeData(
             inputDecorationTheme: InputDecorationTheme(
@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
                 style: ButtonStyle(
               textStyle: MaterialStateProperty.resolveWith((states) {
                 if (states.contains(MaterialState.pressed)) {
-                  return textTheme.headline1;
+                  return textTheme.subtitle1;
                 }
 
-                return textTheme.subtitle1;
+                return textTheme.bodyText1;
               }),
               backgroundColor: MaterialStateProperty.resolveWith((states) {
                 if (states.contains(MaterialState.pressed)) {

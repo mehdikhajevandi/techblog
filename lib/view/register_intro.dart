@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tec/gen/assets.gen.dart';
-import 'package:tec/my_colors.dart';
-import 'package:tec/my_strings.dart';
 import 'package:tec/view/my_cats.dart';
 import 'package:validators/validators.dart';
+
+import '../component/my_strings.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({Key? key}) : super(key: key);
@@ -47,9 +47,6 @@ class RegisterIntro extends StatelessWidget {
 
   Future<dynamic> _showEmailBottomSheet(
       BuildContext context, Size size, TextTheme textTheme) {
-
-
-
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -77,9 +74,8 @@ class RegisterIntro extends StatelessWidget {
                     padding: const EdgeInsets.all(24),
                     child: TextField(
                       onChanged: (value) {
-
-                          print(value + " is Email : "+  isEmail(value).toString());
-
+                        print(
+                            value + " is Email : " + isEmail(value).toString());
                       },
                       style: textTheme.headline5,
                       textAlign: TextAlign.center,
@@ -88,24 +84,21 @@ class RegisterIntro extends StatelessWidget {
                           hintStyle: textTheme.headline5),
                     ),
                   ),
-                  ElevatedButton(onPressed: (() {
-
-                    Navigator.pop(context);
-                    _activateCodeBottomSheet(context, size, textTheme);
-
-                  }), child: Text("ادامه"))
+                  ElevatedButton(
+                      onPressed: (() {
+                        Navigator.pop(context);
+                        _activateCodeBottomSheet(context, size, textTheme);
+                      }),
+                      child: Text("ادامه"))
                 ],
               )),
             ),
           );
         }));
-      }
+  }
 
   Future<dynamic> _activateCodeBottomSheet(
       BuildContext context, Size size, TextTheme textTheme) {
-
-
-
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -133,28 +126,25 @@ class RegisterIntro extends StatelessWidget {
                     padding: const EdgeInsets.all(24),
                     child: TextField(
                       onChanged: (value) {
-
-                          print(value + " is Email : "+  isEmail(value).toString());
-
+                        print(
+                            value + " is Email : " + isEmail(value).toString());
                       },
                       style: textTheme.headline5,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
-                          hintText: "******",
-                          hintStyle: textTheme.headline5),
+                          hintText: "******", hintStyle: textTheme.headline5),
                     ),
                   ),
-                  ElevatedButton(onPressed: (() {
-
-
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MyCats()));
-
-                  }), child: Text("ادامه"))
+                  ElevatedButton(
+                      onPressed: (() {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => MyCats()));
+                      }),
+                      child: Text("ادامه"))
                 ],
               )),
             ),
           );
         }));
-
   }
 }

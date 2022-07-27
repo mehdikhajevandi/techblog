@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'gen/assets.gen.dart';
-import 'models/fake_data.dart';
+import '../gen/assets.gen.dart';
+import '../models/fake_data.dart';
 import 'my_colors.dart';
 
 class TechDivider extends StatelessWidget {
@@ -66,5 +66,3 @@ class MainTags extends StatelessWidget {
     );
   }
 }
-
- 
